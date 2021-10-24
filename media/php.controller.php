@@ -8,8 +8,9 @@
 
   if (isset($_POST['submit'])) { //verifica se foi cliclado
     $soma = ($var1 + $var2 + $var3);
-    $length = sizeof($notas);
-    $media = ($soma / $length);
+    //$length = count($notas);
+    //$length = sizeof($notas);
+    $media = ($soma / count($notas));
     print '<h1> Sua média aritimética (arrendodada) é: '.round($media).'</h1>';
     print '<h1> Sua média aritimética Real é: '.$media.'</h1>';
  }
