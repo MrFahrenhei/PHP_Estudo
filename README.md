@@ -12,6 +12,9 @@
   <img src="https://img.shields.io/badge/-Instagram-DF0174?style=flat-square&labelColor=DF0174&logo=instagram&logoColor=white&link=LINK-DO-SEU-INSTAGRAM"/></a>
 </p>  
 
+![GitHub repo size](https://img.shields.io/github/repo-size/MrFahrenhei/PHP_Estudo?style=for-the-badge)
+![GitHub language count](https://img.shields.io/github/languages/count/MrFahrenhei/PHP_Estudo?style=for-the-badge)
+
 My Studies in PHP
 
 <p align="left">
