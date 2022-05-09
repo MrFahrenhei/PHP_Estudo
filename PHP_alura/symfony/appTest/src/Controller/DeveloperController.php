@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class DeveloperController
 {
     /**
-     * @Route("/desenvolvedores, methods={"POST"})
+     * @Route("/desenvolvedores", methods={"POST"})
      */
     public function newer(Request $request): Response
     {
