@@ -5,6 +5,16 @@
         private $cpfTitular;
         private $nomeTitular;
         private $saldo = 0;
+        private static $id = 0;
+
+        public function __construct(string $cpfTitular, string $nomeTitular)
+        {
+            $this->cpfTitular = $cpfTitular;
+            $this->nomeTitular = $nomeTitular;
+            $this->saldo = 0;
+
+            self::$id++;
+        }
 
         public function sacar(float $valorSacar): void{
             if($valorSacar > $this->saldo){
