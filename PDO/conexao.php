@@ -1,9 +1,22 @@
 <?php
 $path = __DIR__.'/banco.sqlite';
 
-try {
-   $pdo = new PDO('sqlite:'.$path);
-   echo "Deu boa".PHP_EOL;
-} catch (\PDOException $e) {
-    throw new \PDOException($e->getMessage(), (int)$e->getCode());
-}
+$pdo = new PDO('sqlite:'.$path);
+
+$createTableSql = '
+    CREATE TABLE IF NOT EXISTS students (
+        id INTEGER PRIMARY KEY,
+        name TEXT,
+        birth_date TEXT
+    );
+
+    CREATE TABLE IF NOT EXISTS phones (
+        id INTEGER PRIMARY KEY,
+        area_code TEXT,
+        number TEXT,
+        student_id INTEGER,
+        FOREIGN KEY(student_id) REFERENCES students(id)
+    );
+';
+
+$pdo->exec($createTableSql);

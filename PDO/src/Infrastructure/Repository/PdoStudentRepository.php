@@ -33,7 +33,7 @@
         
         private function hydrateStudentList(\PDOStatement $stmt): array
         {
-            $studentDataList = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            $studentDataList = $stmt->fetchAll();
             $studentList = [];
 
             foreach ($studentDataList as $studentData) {
@@ -59,9 +59,6 @@
         {
             $insertQuery = 'INSERT INTO students (name, birth_date) VALUES (:name, :birth_date);';
             $stmt = $this->connection->prepare($insertQuery);
-            if($stmt === False){
-                throw new \RuntimeException('Erro no query');
-            }
             $stmt->bindValue(':name', $student->name);
             $stmt->bindValue(':birth_date', $student->birthDate->format(format:'Y-m-d'));
 

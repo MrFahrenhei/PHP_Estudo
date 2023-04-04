@@ -17,7 +17,7 @@
         $studentRepository->save($a2);
 
         $connection->commit();
-    }catch(\RuntimeException $e){
+    }catch(\PDOException $e){
         echo $e->getMessage();
         $connection->rollBack();
     }
