@@ -9,7 +9,7 @@ class Student
         public readonly string $name,
         public readonly \DateTimeInterface $birthDate,
     ){}
-
+ 
     public function age(): int
     {
         return $this->birthDate

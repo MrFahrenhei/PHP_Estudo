@@ -1,5 +1,4 @@
 <?php
-
 $path = __DIR__.'/banco.sqlite';
 
 try {
@@ -8,5 +7,3 @@ try {
 } catch (\PDOException $e) {
     throw new \PDOException($e->getMessage(), (int)$e->getCode());
 }
-
-var_dump($pdo->exec('CREATE TABLE students (id INTEGER PRIMARY KEY, name TEXT, birth_date TEXT);'));

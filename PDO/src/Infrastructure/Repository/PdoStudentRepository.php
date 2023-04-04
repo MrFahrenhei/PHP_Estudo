@@ -1,16 +1,16 @@
 <?php
     namespace Alura\Pdo\Infrastructure\Repository;
-
+  
     use Alura\Pdo\Domain\Model\Student;
-    use Alura\Pdo\Domain\Respository\StudentRepository;
-    use Alura\Pdo\Infrastructure\Persistence\ConnectionCreator;
+    use Alura\Pdo\Domain\Repository\StudentRepository;
+    use PDO;
 
     class PdoStudentRepository implements StudentRepository
     {   
-        private \PDO $connection;
-        public function __construct() 
+        private PDO $connection;
+        public function __construct(PDO $connection)
         { 
-            $this->connection = ConnectionCreator::createConnection();
+            $this->connection = $connection;
         }
 
         public function allStudents(): array
@@ -21,7 +21,7 @@
             return $this->hydrateStudentList($stmt);
         }
 
-        public function studentsBrithAt(\DateTimeInterface $birthDate): array
+        public function studentsBirthAt(\DateTimeInterface $birthDate): array
         {
             $sqlQuery = 'SELECT * FROM students WHERE birth_date = ?;';
             $stmt = $this->connection->prepare($sqlQuery);
@@ -30,6 +30,7 @@
 
             return $this->hydrateStudentList($stmt);
         }
+        
         private function hydrateStudentList(\PDOStatement $stmt): array
         {
             $studentDataList = $stmt->fetchAll(\PDO::FETCH_ASSOC);
@@ -56,19 +57,17 @@
 
         public function insert(Student $student): bool
         {
-            $insertQuery = 'INSERT INTO students (name birth_date) VALUES (:name, :birth_date);';
+            $insertQuery = 'INSERT INTO students (name, birth_date) VALUES (:name, :birth_date);';
             $stmt = $this->connection->prepare($insertQuery);
-
-            $success = $stmt->execute([
-                ':name' => $student->name,
-                ':birth_date' => $student->birthDate->format(format:'Y-m-d'),
-            ]);
-            
-            if($success){
-                $student->defineId($this->connection->lastInsertId());
+            if($stmt === False){
+                throw new \RuntimeException('Erro no query');
             }
+            $stmt->bindValue(':name', $student->name);
+            $stmt->bindValue(':birth_date', $student->birthDate->format(format:'Y-m-d'));
 
-            return $success;
+            $success = $stmt->execute();
+            
+        return $success;
         }
 
         public function update(Student $student): bool
@@ -88,4 +87,5 @@
             $stmt->bindValue(1, $student->id, \PDO::PARAM_INT);
             return $stmt->execute();
         }
+
     }
