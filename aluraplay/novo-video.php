@@ -1,25 +1,25 @@
 <?php
-    $path = __DIR__.'/db.sqlite';
-    $pdo = new PDO("sqlite:$path");
+use Alura\Mvc\Entity\Video;
+use Alura\Mvc\Repository\VideoRepository;
 
-    $url = filter_input(INPUT_POST, 'url', FILTER_VALIDATE_URL);
-    if($url == false){
-        header('Location: /index.php?sucess=0');
-        exit();
-    }
-    $titulo = filter_input(INPUT_POST, 'title');
-    if($titulo == false){
-        header('Location ./index.php?sucess=0');
-        exit();
-    }
+$dbPath = __DIR__ . '/db.sqlite';
+$pdo = new PDO("sqlite:$dbPath");
 
-    $sql = 'INSERT INTO videos (url, title) VALUES (?, ?)';
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(1, $url);
-    $stmt->bindValue(2, $titulo);
+$url = filter_input(INPUT_POST, 'url', FILTER_VALIDATE_URL);
+if ($url === false) {
+    header('Location: /?sucesso=0');
+    exit();
+}
+$title = filter_input(INPUT_POST, 'titulo');
+if ($title === false) {
+    header('Location: /?sucesso=0');
+    exit();
+}
 
-    if($stmt->execute() === false){
-        header('Location: /index.php?sucess=0');
-    }else{
-        header('Location: /index.php?sucess=1');
-    }
+$repository = new VideoRepository($pdo);
+
+if ($repository->add(new Video($url, $title)) === false) {
+    header('Location: /?sucesso=0');
+} else {
+    header('Location: /?sucesso=1');
+}
