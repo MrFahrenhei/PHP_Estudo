@@ -1,11 +1,5 @@
 <?php
 
-use Alura\Mvc\Controller\DeleteVideoController;
-use Alura\Mvc\Controller\EditVideoController;
-use Alura\Mvc\Controller\NewVideoController;
-use Alura\Mvc\Controller\VideoFormController;
-use Alura\Mvc\Controller\VideoListController;
-
     return [
         'GET|/' => \Alura\Mvc\Controller\VideoListController::class,
         'GET|/novo-video' => \Alura\Mvc\Controller\VideoFormController::class,
@@ -13,4 +7,9 @@ use Alura\Mvc\Controller\VideoListController;
         'GET|/editar-video' => \Alura\Mvc\Controller\VideoFormController::class,
         'POST|/editar-video' => \Alura\Mvc\Controller\EditVideoController::class,
         'GET|/remover-video' => \Alura\Mvc\Controller\DeleteVideoController::class,
+        'GET|/login'=> \Alura\Mvc\Controller\LoginFormController::class,
+        'POST|/login'=> \Alura\Mvc\Controller\LoginController::class,
+        'GET|/logout' => \Alura\Mvc\Controller\LogoutController::class,
+        'GET|/videos-json' => \Alura\Mvc\Controller\JsnVideoListController::class,
+        'POST|/videos' => Alura\Mvc\Controller\NewJsonVideoController::class
     ];
