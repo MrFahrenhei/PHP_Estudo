@@ -10,11 +10,13 @@ use Alura\Mvc\Controller\{
     LoginFormController,
     NewVideoController,
     VideoFormController,
-    VideoListController
+    VideoListController,
+    CreateConnection
 };
 use Alura\Mvc\Repository\UserRepository;
-
 require_once __DIR__ . '/../vendor/autoload.php';
+
+$pdo = CreateConnection::processaRequisicao();
 
 $dbPath = __DIR__ . '/../db.sqlite';
 $pdo = new PDO("sqlite:$dbPath");
@@ -27,7 +29,10 @@ $pathInfo = $_SERVER['PATH_INFO'] ?? '/';
 $httpMethod = $_SERVER['REQUEST_METHOD'];
 
 
-session_start();
+//session_start();
+
+echo "<script> console.log(".session_start().");</script>";
+
 session_regenerate_id();
 $isLoginRoute = $pathInfo === '/login';
 if(!array_key_exists('logado', $_SESSION) && !$isLoginRoute){

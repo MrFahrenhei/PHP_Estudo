@@ -7,7 +7,6 @@ use PDO;
 class VideoRepository{
     public function __construct(private PDO $pdo)
     {
-        
     }
 
     public function add(Video $video): bool
