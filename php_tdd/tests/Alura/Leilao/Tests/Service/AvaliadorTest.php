@@ -79,7 +79,8 @@ class AvaliadorTest extends TestCase
         static::assertEquals(2000, $maiores[1]->valor);
         static::assertEquals(2500, $maiores[2]->valor);
     }
-    public function LeilaoOrdemCrescente()
+
+    public static function LeilaoOrdemCrescente()
     {
         $leilao = new Leilao("Fiat 147 0KM");
 
@@ -95,7 +96,8 @@ class AvaliadorTest extends TestCase
             [$leilao]
         ];
     }
-    public function LeilaoOrdemDecrescente()
+
+    public static function LeilaoOrdemDecrescente()
     {
         $leilao = new Leilao("Fiat 147 0KM");
 
@@ -111,7 +113,8 @@ class AvaliadorTest extends TestCase
             [$leilao]
         ];
     }
-    public function LeilaoOrdemAleatoria()
+
+    public static function LeilaoOrdemAleatoria()
     {
         $leilao = new Leilao("Fiat 147 0KM");
 
