@@ -9,7 +9,7 @@ class Avaliador
 {
     private float $menorValor = INF;
     private float $maiorValor = -INF;
-    private array $maioresLances;
+    private array $maioresLances = [];
 
     public function __construct(
     ){
