@@ -1,6 +1,6 @@
 <?php
 function funcao5(){
-    echo 'Entrei na função 3'.PHP_EOL;
+    echo 'Entrei na função 5'.PHP_EOL;
     try {
         funcao6();
     }catch (RuntimeException | DivisionByZeroError $e){
